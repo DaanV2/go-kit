@@ -3,7 +3,7 @@ package generics_test
 import (
 	"testing"
 
-	"github.com/DaanV2/go-kit/generics"
+	"github.com/daanv2/go-kit/generics"
 	"github.com/stretchr/testify/require"
 )
 

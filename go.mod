@@ -1,4 +1,4 @@
-module github.com/DaanV2/go-kit
+module github.com/daanv2/go-kit
 
 go 1.23
 
