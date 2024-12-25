@@ -20,7 +20,7 @@ func Test_NameOf(t *testing.T) {
 func Test_PackageOf(t *testing.T) {
 	pkg := generics.PackageOf[GenericTypeTest]()
 
-	require.Equal(t, pkg, "github.com/DaanV2/go-kit/generics_test")
+	require.Equal(t, pkg, "github.com/daanv2/go-kit/generics_test")
 }
 
 func Test_SizeOf(t *testing.T) {
