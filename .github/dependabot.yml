@@ -6,6 +6,7 @@
 version: 2
 updates:
   - package-ecosystem: "github-actions" # See documentation for possible values
+    directory: "/" # Location of the manifest file
     labels:
       - dependencies
     schedule:
@@ -15,6 +16,7 @@ updates:
         patterns:
           - "*"
   - package-ecosystem: gomod
+    directory: "/" # Location of the manifest file
     labels:
       - dependencies
     schedule:
