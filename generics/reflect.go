@@ -4,21 +4,18 @@ import "reflect"
 
 // NameOf returns the type name of the given object
 func NameOf[T any]() string {
-	var item T
-	return reflect.TypeOf(item).Name()
+	return reflect.TypeFor[T]().Name()
 }
 
 // PackageOf returns the type package of the given object
 func PackageOf[T any]() string {
-	var item T
-	return reflect.TypeOf(item).PkgPath()
+	return reflect.TypeFor[T]().PkgPath()
 }
 
 // SizeOf returns the amount of bytes the object is.
 // NOTE: it does not traverse pointers to determine their size
-func SizeOf[T any]() uint {
-	var item T
-	return uint(reflect.TypeOf(item).Size())
+func SizeOf[T any]() uintptr {
+	return reflect.TypeFor[T]().Size()
 }
 
 func Empty[T any]() T {
