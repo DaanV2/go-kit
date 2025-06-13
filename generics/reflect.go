@@ -4,7 +4,12 @@ import "reflect"
 
 // NameOf returns the type name of the given object
 func NameOf[T any]() string {
-	return reflect.TypeFor[T]().Name()
+	t := reflect.TypeFor[T]()
+	if t.Kind() == reflect.Ptr {
+		t = t.Elem()
+	}
+
+	return t.Name()
 }
 
 // PackageOf returns the type package of the given object

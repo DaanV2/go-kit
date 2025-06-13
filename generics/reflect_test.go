@@ -60,6 +60,25 @@ func Test_NameOf_Table(t *testing.T) {
 		{"rune (alias for int32)", "int32", generics.NameOf[rune]},
 		{"any", "", generics.NameOf[any]},
 		{"TestCase", "TestCase", generics.NameOf[TestCase]},
+
+		// Pointers
+		{"*bool", "bool", generics.NameOf[*bool]},
+		{"*uint", "uint", generics.NameOf[*uint]},
+		{"*uint8", "uint8", generics.NameOf[*uint8]},
+		{"*uint16", "uint16", generics.NameOf[*uint16]},
+		{"*uint32", "uint32", generics.NameOf[*uint32]},
+		{"*uint64", "uint64", generics.NameOf[*uint64]},
+		{"*int", "int", generics.NameOf[*int]},
+		{"*int8", "int8", generics.NameOf[*int8]},
+		{"*int16", "int16", generics.NameOf[*int16]},
+		{"*int32", "int32", generics.NameOf[*int32]},
+		{"*int64", "int64", generics.NameOf[*int64]},
+		{"*float32", "float32", generics.NameOf[*float32]},
+		{"*float64", "float64", generics.NameOf[*float64]},
+		{"*complex128", "complex128", generics.NameOf[*complex128]},
+		{"*byte (alias for uint8)", "uint8", generics.NameOf[*byte]},
+		{"*rune (alias for int32)", "int32", generics.NameOf[*rune]},
+		{"*TestCase", "TestCase", generics.NameOf[*TestCase]},
 	}
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
@@ -105,4 +124,3 @@ type TestCase struct {
 	B int32
 	C int32
 }
-
