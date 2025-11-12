@@ -2,6 +2,7 @@ package xcontext_test
 
 import (
 	"context"
+	"fmt"
 	"testing"
 
 	"github.com/daanv2/go-kit/xcontext"
@@ -59,4 +60,60 @@ func Test_XContext_GetSet(t *testing.T) {
 		_, ok := carHandler.Get(ctx)
 		require.False(t, ok)
 	})
+}
+
+// Examples
+
+func ExampleHandler_Set() {
+	type User struct {
+		Name string
+	}
+
+	handler := &xcontext.Handler[User]{}
+	ctx := context.Background()
+
+	user := User{Name: "Alice"}
+	ctx = handler.Set(ctx, user)
+
+	retrieved, ok := handler.Get(ctx)
+	if ok {
+		fmt.Println(retrieved.Name)
+	}
+	// Output: Alice
+}
+
+func ExampleHandler_Get() {
+	type RequestID string
+
+	handler := &xcontext.Handler[RequestID]{}
+	ctx := context.Background()
+
+	// Get from empty context
+	_, ok := handler.Get(ctx)
+	fmt.Printf("Value found: %t\n", ok)
+
+	// Set and get
+	ctx = handler.Set(ctx, RequestID("req-123"))
+	value, ok := handler.Get(ctx)
+	fmt.Printf("Value found: %t, Value: %s\n", ok, value)
+	// Output: Value found: false
+	// Value found: true, Value: req-123
+}
+
+func ExampleHandler_Set_multipleTypes() {
+	type UserID int
+	type SessionID string
+
+	userHandler := &xcontext.Handler[UserID]{}
+	sessionHandler := &xcontext.Handler[SessionID]{}
+
+	ctx := context.Background()
+	ctx = userHandler.Set(ctx, UserID(42))
+	ctx = sessionHandler.Set(ctx, SessionID("sess-abc"))
+
+	userID, _ := userHandler.Get(ctx)
+	sessionID, _ := sessionHandler.Get(ctx)
+
+	fmt.Printf("User: %d, Session: %s\n", userID, sessionID)
+	// Output: User: 42, Session: sess-abc
 }
