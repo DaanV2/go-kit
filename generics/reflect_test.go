@@ -1,6 +1,7 @@
 package generics_test
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/daanv2/go-kit/generics"
@@ -123,4 +124,64 @@ type TestCase struct {
 	A int32
 	B int32
 	C int32
+}
+
+// Examples
+
+func ExampleNameOf() {
+	name := generics.NameOf[int]()
+	fmt.Println(name)
+	// Output: int
+}
+
+func ExampleNameOf_customType() {
+	name := generics.NameOf[TestCase]()
+	fmt.Println(name)
+	// Output: TestCase
+}
+
+func ExampleNameOf_pointer() {
+	name := generics.NameOf[*string]()
+	fmt.Println(name)
+	// Output: string
+}
+
+func ExamplePackageOf() {
+	pkg := generics.PackageOf[TestCase]()
+	fmt.Println(pkg)
+	// Output: github.com/daanv2/go-kit/generics_test
+}
+
+func ExamplePackageOf_builtin() {
+	pkg := generics.PackageOf[int]()
+	fmt.Println(pkg)
+	// Output: 
+}
+
+func ExampleSizeOf() {
+	size := generics.SizeOf[int32]()
+	fmt.Println(size)
+	// Output: 4
+}
+
+func ExampleSizeOf_struct() {
+	size := generics.SizeOf[TestCase]()
+	fmt.Println(size)
+	// Output: 12
+}
+
+func ExampleEmpty() {
+	empty := generics.Empty[int]()
+	fmt.Println(empty)
+	// Output: 0
+}
+
+func ExampleEmpty_struct() {
+	type Person struct {
+		Name string
+		Age  int
+	}
+	empty := generics.Empty[Person]()
+	fmt.Printf("Name: %q, Age: %d\n", empty.Name, empty.Age)
+	// Output: Name: "", Age: 0
 }
