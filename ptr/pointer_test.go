@@ -8,14 +8,14 @@ import (
 
 func ExampleTo() {
 	value := 42
-	pointer := ptr.To(value)
+	pointer := new(value)
 	fmt.Println(*pointer)
 	// Output: 42
 }
 
 func ExampleTo_string() {
 	str := "hello"
-	strPtr := ptr.To(str)
+	strPtr := new(str)
 	fmt.Println(*strPtr)
 	// Output: hello
 }

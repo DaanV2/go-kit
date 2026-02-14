@@ -2,8 +2,9 @@ package ptr
 
 import "github.com/daanv2/go-kit/generics"
 
+//go:fix inline
 func To[T any](v T) *T {
-	return &v
+	return new(v)
 }
 
 func From[T any](v *T) T {

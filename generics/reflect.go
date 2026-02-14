@@ -5,7 +5,7 @@ import "reflect"
 // NameOf returns the type name of the given object
 func NameOf[T any]() string {
 	t := reflect.TypeFor[T]()
-	if t.Kind() == reflect.Ptr {
+	if t.Kind() == reflect.Pointer {
 		t = t.Elem()
 	}
 
